@@ -33,7 +33,7 @@ app.get("/",async(req,res)=>{
     res.status(500).json({ error: err.message })
     }
 })
-app.post('/', async (req, res) => {
+app.post('/update/:id', async (req, res) => {
   const { content } = req.body;
 
   if (!content) {
