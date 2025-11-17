@@ -49,7 +49,7 @@ app.post('/', async (req, res) => {
     res.status(500).json({ error: "Database error" });
   }
 });
-app.put("/update/:id", async (req, res) => {
+app.put("/:id", async (req, res) => {
   try {
     const { content } = req.body;
     const { id } = req.params;
