@@ -62,6 +62,7 @@ app.put("/:id", async (req, res) => {
   }
 });
 
-app.listen(port,(req,res)=>{
-    console.log("server is runing ",port)
-})
+app.listen(process.env.PORT || 10000, () => {
+  console.log("Server running");
+});
+
