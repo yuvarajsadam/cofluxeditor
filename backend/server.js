@@ -1,72 +1,80 @@
-const exprees=require("express")
-const mongoose=require("mongoose")
-const env=require("dotenv")
-const cors=require("cors")
-const text=require("./model/usermodel")
-env.config()
-const app=exprees()
-app.use(exprees.json())
-app.use(cors({
-  origin: "https://cofluxeditor-frontend.onrender.com",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type"],
-}));
-const port=process.env.PORT ||5001
-async function  connect(){
-try{
-    await mongoose.connect(process.env.MONOGO_URL)
-    console.log("database connected succesfully")
-}
-catch(e){
-    console.error("data base is not connected ",e.message);
-    
-}
+ const express = require("express");
+const mongoose = require("mongoose");
+const env = require("dotenv");
+const cors = require("cors");
+const text = require("./model/usermodel");
+
+env.config();
+const app = express();
+
+app.use(express.json());
+
+app.use(
+  cors({
+    origin: "https://cofluxeditor-frontend.onrender.com",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
+
+const port = process.env.PORT || 5001;
+
+// Mongo Connect
+async function connect() {
+  try {
+    await mongoose.connect(process.env.MONOGO_URL);
+    console.log("database connected successfully");
+  } catch (e) {
+    console.error("database is not connected ", e.message);
+  }
 }
 connect();
-app.get("/",async(req,res)=>{
-    try{
-    const data= await text.find()
-    res.status(200).json(data)
-    }
-  
-     catch (err) {
-    res.status(500).json({ error: err.message })
-    }
-})
-app.post('/update/:id', async (req, res) => {
-  const { content } = req.body;
 
-  if (!content) {
-    return res.status(400).json({ error: 'Content is required' });
-  }
-
+// GET all documents
+app.get("/", async (req, res) => {
   try {
-    const result = await text.insertOne({ content });
-
-    res.status(201).json({
-      message: "Document saved",
-      id: result.insertedId
-    });
-
+    const data = await text.find();
+    res.status(200).json(data);
   } catch (err) {
-    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// CREATE new document
+app.post("/create", async (req, res) => {
+  try {
+    const { content } = req.body;
+
+    const doc = await text.create({ content });
+
+    res.status(201).json(doc);
+  } catch (err) {
     res.status(500).json({ error: "Database error" });
   }
 });
+
+// UPDATE existing (🔥 this is what your frontend calls)
 app.put("/update/:id", async (req, res) => {
   try {
     const { content } = req.body;
     const { id } = req.params;
 
-    await text.findByIdAndUpdate(id, { content });
+    const updated = await text.findByIdAndUpdate(
+      id,
+      { content },
+      { new: true }
+    );
 
-    res.json({ msg: "updated" });
-  } catch (e) {
+    if (!updated) {
+      return res.status(404).json({ error: "Document not found" });
+    }
+
+    res.json(updated);
+  } catch (err) {
     res.status(500).json({ error: "Update failed" });
   }
 });
 
-app.listen(process.env.PORT || 10000, () => {
-  console.log("Server running");
+app.listen(port, () => {
+  console.log("Server running on " + port);
 });
-
