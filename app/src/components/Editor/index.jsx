@@ -3,7 +3,7 @@ import "./index.css";
 
 const Editor = () => {
   const editorRef = useRef(null);
-  const url = "http://localhost:5000/";
+  const url = "https://cofluxeditor.onrender.com";
 
   const [documents, setDocuments] = useState([]);
   const [activeId, setActiveId] = useState(null);
