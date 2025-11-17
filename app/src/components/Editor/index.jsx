@@ -47,7 +47,7 @@ const Editor = () => {
     const doc = documents.find((d) => d.id === activeId);
     if (!doc) return;
 
-    await fetch(url + doc.dbId, {
+    await fetch(`${url}update/${doc.dbId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ content: html })
