@@ -6,7 +6,7 @@ const text=require("./model/usermodel")
 env.config()
 const app=exprees()
 app.use(exprees.json())
-app.use(cors())
+app.use(cors({ origin: "*" }));
 const port=process.env.PORT ||5001
 async function  connect(){
 try{
