@@ -6,7 +6,11 @@ const text=require("./model/usermodel")
 env.config()
 const app=exprees()
 app.use(exprees.json())
-app.use(cors({ origin: "*" }));
+app.use(cors({
+  origin: "https://cofluxeditor-frontend.onrender.com",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"],
+}));
 const port=process.env.PORT ||5001
 async function  connect(){
 try{
