@@ -1,0 +1,163 @@
+ /* Global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #265686 0%, #4b1616 100%);
+  font-family: "Inter", sans-serif;
+  padding: 20px;
+}
+
+/* Main Container */
+.container {
+  width: 90%;
+  width: 1000px;
+  margin: auto;
+  backdrop-filter: blur(14px);
+  background: rgba(24, 4, 4, 0.65);
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: fadeIn 0.6s ease;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* TAB BAR */
+.tab-bar {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #5d5de0, #303044);
+  padding: 10px;
+  gap: 8px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.12);
+  color: #a32626;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  backdrop-filter: blur(5px);
+}
+
+.tab:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.tab.active {
+  background: #fff;
+  color: #1e1e2f;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.tab button {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* NEW TAB BUTTON */
+.new-btn {
+  background: #6a5af9;
+  color: rgb(102, 29, 29);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.new-btn:hover {
+  background: #5546d8;
+}
+
+/* Title */
+header {
+  padding: 20px;
+  background: #000000;
+  border-bottom: 1px solid #eee;
+}
+
+.title-input {
+  width: 100%;
+  font-size: 26px;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  background: transparent;
+  letter-spacing: 0.7px;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  padding: 12px 20px;
+  background: #1a0202d9;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #eee;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.toolbar button {
+  border: none;
+  background: #1f1f47;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.toolbar button:hover {
+  background: #dedeee;
+  transform: translateY(-1px);
+}
+
+.toolbar input[type="color"] {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  height: 38px;
+  width: 40px;
+  border-radius: 8px;
+}
+
+/* Editor */
+.editor {
+  min-height: 450px;
+  padding: 30px;
+  outline: none;
+  font-size: 18px;
+  color:#000000;
+  line-height: 1.8;
+  background: #ffffffea;
+}
+
+/* Footer */
+footer {
+  padding: 12px 20px;
+  background: #fafafa;
+  border-top: 1px solid #eee;
+  text-align: right;
+  color: #666;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+}
